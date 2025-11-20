@@ -1,0 +1,30 @@
+{
+  "name": "tinylink",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "prisma generate && next build",
+    "start": "next start -p 3000",
+    "prisma:migrate": "prisma migrate dev --name init --schema=prisma/schema.prisma",
+    "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
+    "lint": "eslint . --ext .js,.jsx"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.0.0",
+    "axios": "^1.6.0",
+    "clsx": "^1.2.1",
+    "copy-to-clipboard": "^3.3.1",
+    "next": "16.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "^3.4.7",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0"
+  }
+}
