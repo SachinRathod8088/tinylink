@@ -1,9 +1,0 @@
-module.exports = {
-  schema: './prisma/schema.prisma',
-  datasource: {
-    db: {
-      adapter: 'postgresql',
-      url: process.env.DATABASE_URL
-    }
-  }
-}

@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('')
 
+  // Fetch links
   const fetchLinks = async () => {
     setLoading(true)
     try {
@@ -26,48 +27,80 @@ export default function Dashboard() {
     fetchLinks()
   }, [])
 
-  const handleCreated = (newLink) => setLinks(prev => [newLink, ...prev])
-  const handleDeleted = (code) => setLinks(prev => prev.filter(l => l.code !== code))
+  const handleCreated = (newLink) => setLinks((prev) => [newLink, ...prev])
+  const handleDeleted = (code) =>
+    setLinks((prev) => prev.filter((l) => l.code !== code))
 
-  const filtered = links.filter(l => l.code.includes(filter) || l.url.includes(filter))
+  const filtered = links.filter(
+    (l) => l.code.includes(filter) || l.url.includes(filter)
+  )
 
   return (
     <Layout>
       <div className="max-w-7xl mx-auto p-6">
         <h1 className="text-3xl font-semibold mb-6">TinyLink Dashboard</h1>
 
-        {/* Top row: form (left) and search (right) */}
+        {/* Top Row: Form (left) + Search (right) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 items-start">
-          {/* Left: Form (occupies 2/3 on md+) */}
+
+          {/* LEFT — Create Link Form */}
           <div className="md:col-span-2 bg-gradient-to-br from-sky-50 to-white border border-sky-100 rounded-lg shadow-sm p-6">
             <h2 className="text-xl font-medium mb-3">Create a Short Link</h2>
-            <p className="text-sm text-gray-600 mb-4">Enter target URL and optionally set a custom short code (6–8 alphanumeric chars).</p>
+            <p className="text-sm text-gray-600 mb-4">
+              Enter a long URL and optionally a custom short code.
+            </p>
             <LinkForm onCreated={handleCreated} />
           </div>
 
-          {/* Right: Search card (occupies 1/3 on md+) */}
+          {/* RIGHT — Search Card */}
           <div className="bg-slate-50 border border-slate-100 rounded-lg shadow-sm p-6">
             <h2 className="text-xl font-medium mb-3">Search / Filters</h2>
-            <p className="text-sm text-gray-600 mb-4">Quickly find links by code or URL.</p>
+            <p className="text-sm text-gray-600 mb-4">
+              Search by code or URL to quickly find a link.
+            </p>
 
-            <div className="space-y-3">
+            {/* Search Input with Icon */}
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                {/* Search Icon */}
+                <svg
+                  className="h-5 w-5 text-slate-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+                  />
+                </svg>
+              </div>
+
               <input
-                className="w-full px-4 py-2 rounded border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                className="w-full pl-10 px-4 py-2 rounded border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-200"
                 placeholder="Search by code or URL"
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
+                aria-label="Search links"
               />
+            </div>
 
-              {/* Optional future filters (kept simple now) */}
-              <div className="text-sm text-gray-500">Results: {filtered.length} / {links.length}</div>
+            {/* Optional Search Results Count */}
+            <div className="text-sm text-gray-500 mt-3">
+              Showing {filtered.length} of {links.length} links
             </div>
           </div>
         </div>
 
-        {/* Bottom row: full-width table */}
+        {/* Table FULL-WIDTH below both cards */}
         <div className="bg-white border border-slate-100 rounded-lg shadow-sm p-4">
           <h2 className="text-xl font-medium mb-3">Your Links</h2>
-          <div className="text-sm text-gray-600 mb-4">Manage your short links below — click code to view stats, use actions to copy/open/delete.</div>
+          <p className="text-sm text-gray-600 mb-4">
+            Manage your short links below — copy, open, delete, or view stats.
+          </p>
 
           {loading ? (
             <div className="p-6 text-center text-gray-500">Loading links…</div>
