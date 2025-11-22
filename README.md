@@ -8,8 +8,8 @@ A clean, full-stack, production-ready URL Shortener built using <b>Next.js, Pris
 ---
 
 ## 🚀 Live Demo  
-🔗 **Website:** _[Add Vercel URL here_](https://tinylink-od4i.vercel.app/)  
-🎥 **Video Walkthrough:** _Add your YouTube / Drive link here_  
+🔗 **Website:** ((https://tinylink-chi-ten.vercel.app/))  
+🎥 **Video Walkthrough:** (https://www.veed.io/view/f59a8d55-9ba4-4292-ae12-96ffbfb3f82d?source=editor&panel=share) 
 
 ---
 
@@ -127,3 +127,4 @@ Create Link API	/api/links
 Stats Page	/code/:code
 Redirect Page	/:code
 Health Check	/healthz
+
